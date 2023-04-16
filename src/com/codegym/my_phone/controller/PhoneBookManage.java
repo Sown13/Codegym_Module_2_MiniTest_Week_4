@@ -45,6 +45,10 @@ public class PhoneBookManage extends Phone implements IPhone {
         System.out.println(listFilter);
     }
 
+    public void display() {
+        System.out.println(contactList);
+    }
+
     @Override
     public void insertPhone(Contact contact) {
         boolean isExisted = contactList
@@ -73,6 +77,7 @@ public class PhoneBookManage extends Phone implements IPhone {
                 .filter(contact -> !contact.getName().equals(name))
                 .collect(Collectors.toList());
         WritePhoneNumber.saveToPhoneBook(contactList);
+        System.out.println("Remove success");
     }
 
     @Override
@@ -81,6 +86,9 @@ public class PhoneBookManage extends Phone implements IPhone {
         insertPhone(newContact);
     }
 
+    public void clearPhoneBook(){
+        contactList.clear();
+    }
     public List<Contact> getContactList() {
         return contactList;
     }

@@ -5,7 +5,7 @@ import com.codegym.my_phone.model.Contact;
 import java.io.*;
 import java.util.List;
 
-public class WritePhoneNumber {
+public class WritePhoneNumber<E> {
     public static void exportPhoneNumber(List<Contact> exportList, String pathName){
         File exportPhoneBook = new File(pathName);
         try(FileOutputStream fileOutputStream = new FileOutputStream(exportPhoneBook);
@@ -14,8 +14,8 @@ public class WritePhoneNumber {
                 objectOutputStream.writeObject(contact);
             }
         }
-        catch (IOException e) {
-            throw new RuntimeException(e);
+        catch (Exception e) {
+            e.printStackTrace();
         }
     }
     public static void saveToPhoneBook(List<Contact> exportList){
@@ -28,8 +28,21 @@ public class WritePhoneNumber {
                 fileWriter.write(contact.getType().getTypeName() + "\n");
             }
         }
-        catch (IOException e) {
-            throw new RuntimeException(e);
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public void exportPhoneNumberGeneric(List<E> exportList){
+        String pathName = "src\\com\\codegym\\my_phone\\data\\test_generic.txt";
+        File exportPhoneBook = new File(pathName);
+        try(FileOutputStream fileOutputStream = new FileOutputStream(exportPhoneBook);
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream) ){
+            for(E contact : exportList){
+                objectOutputStream.writeObject(contact);
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

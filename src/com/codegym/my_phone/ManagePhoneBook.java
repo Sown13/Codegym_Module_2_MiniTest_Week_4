@@ -23,7 +23,10 @@ public class ManagePhoneBook {
         Type company = new Type("Company");
         Type customer = new Type("Customer");
         Type other = new Type("Other");
-
+        List<Contact> phoneBookList = ReadPhoneNumber.importPhoneBook("src\\com\\codegym\\my_phone\\data\\phone_book.txt");
+        for (Contact contact : phoneBookList) {
+            phoneBook.insertPhone(contact);
+        }
         int choice;
         while (true) {
             System.out.println("Please choose your action:");
@@ -32,8 +35,11 @@ public class ManagePhoneBook {
             System.out.println("3/ Remove a contact");
             System.out.println("4/ Quick Update a contact");
             System.out.println("5/ Search for a contact");
-            System.out.println("6/ Import phone book");
-            System.out.println("7/ Export phone book");
+            System.out.println("6/ Import phone book from text file");
+            System.out.println("7/ Export phone book to file");
+            System.out.println("8/ Test write generic");
+            System.out.println("9/ Test read generic");
+            System.out.println("10/ Clear Phone Book");
             System.out.println("0/ Exit");
             choice = Integer.parseInt(scanner.nextLine());
             switch (choice) {
@@ -49,7 +55,7 @@ public class ManagePhoneBook {
                         System.out.println("0/ Back to main menu");
                         choice = Integer.parseInt(scanner.nextLine());
                         switch (choice) {
-                            case 1 -> ReadPhoneNumber.readPhoneBook();
+                            case 1 -> phoneBook.display();
                             case 2 -> phoneBook.display(friend);
                             case 3 -> phoneBook.display(family);
                             case 4 -> phoneBook.display(company);
@@ -116,6 +122,15 @@ public class ManagePhoneBook {
                     }
                     WritePhoneNumber.exportPhoneNumber(phoneBook.getContactList(), pathName);
                 }
+                case 8 -> {
+                    WritePhoneNumber<Contact> writer = new WritePhoneNumber<>();
+                    writer.exportPhoneNumberGeneric(phoneBook.getContactList());
+                }
+                case 9 -> {
+                    ReadPhoneNumber<Contact> reader = new ReadPhoneNumber<>();
+                    System.out.println(reader.readPhoneBookGeneric());
+                }
+                case 10 -> phoneBook.clearPhoneBook();
                 case 0 -> System.exit(0);
             }
         }

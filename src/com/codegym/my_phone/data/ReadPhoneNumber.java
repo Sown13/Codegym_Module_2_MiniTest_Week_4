@@ -4,12 +4,13 @@ import com.codegym.my_phone.model.Contact;
 import com.codegym.my_phone.model.Type;
 
 import java.io.File;
-import java.io.IOException;
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class ReadPhoneNumber {
+public class ReadPhoneNumber<E> {
     public static List<Contact> importPhoneBook(String pathName){
         List<Contact> importList = new ArrayList<>();
 //        Path importPhoneBook = Paths.get(".src\\com\\codegym\\my_phone\\data\\phone_book_importer.txt");
@@ -21,11 +22,10 @@ public class ReadPhoneNumber {
                 String typeName = scanner.next();
                 Contact contact = new Contact(name,phoneNumber, new Type(typeName));
                 importList.add(contact);
-                System.out.println(name + phoneNumber + contact);
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
             System.out.println("Something wrong");
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
         return importList;
     }
@@ -38,9 +38,23 @@ public class ReadPhoneNumber {
                 String contact = scanner.nextLine();
                 System.out.println(++order + " " + contact);
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
             System.out.println("Something wrong");
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
+    }
+    public List<E> readPhoneBookGeneric(){
+        String pathName = "src\\com\\codegym\\my_phone\\data\\test_generic.txt";
+        List<E> listContact = new ArrayList<>();
+        File binaryContact = new File(pathName);
+        try (ObjectInputStream reader = new ObjectInputStream(new FileInputStream(binaryContact))){
+            while (reader.readObject() != null){
+                listContact.add((E) reader.readObject());
+            }
+            System.out.println("Read success");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return listContact;
     }
 }
