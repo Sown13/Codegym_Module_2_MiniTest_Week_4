@@ -63,6 +63,7 @@ public class PhoneBookManage extends Phone implements IPhone {
 
     @Override
     public void updatePhone(String name, String newPhone) {
-// check and update from .txt
+        Contact newContact = new Contact(name,newPhone);
+        insertPhone(newContact);
     }
 }
