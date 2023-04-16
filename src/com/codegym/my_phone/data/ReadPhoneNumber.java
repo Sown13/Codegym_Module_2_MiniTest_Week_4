@@ -48,9 +48,7 @@ public class ReadPhoneNumber<E> {
         List<E> listContact = new ArrayList<>();
         File binaryContact = new File(pathName);
         try (ObjectInputStream reader = new ObjectInputStream(new FileInputStream(binaryContact))){
-            while (reader.readObject() != null){
-                listContact.add((E) reader.readObject());
-            }
+                listContact = (List<E>)reader.readObject();
             System.out.println("Read success");
         } catch (Exception e) {
             e.printStackTrace();

@@ -37,9 +37,7 @@ public class WritePhoneNumber<E> {
         File exportPhoneBook = new File(pathName);
         try(FileOutputStream fileOutputStream = new FileOutputStream(exportPhoneBook);
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream) ){
-            for(E contact : exportList){
-                objectOutputStream.writeObject(contact);
-            }
+                objectOutputStream.writeObject(exportList);
         }
         catch (Exception e) {
             e.printStackTrace();

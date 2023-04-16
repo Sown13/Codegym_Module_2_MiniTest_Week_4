@@ -88,6 +88,7 @@ public class PhoneBookManage extends Phone implements IPhone {
 
     public void clearPhoneBook(){
         contactList.clear();
+        WritePhoneNumber.saveToPhoneBook(contactList);
     }
     public List<Contact> getContactList() {
         return contactList;
