@@ -19,6 +19,14 @@ public class ManagePhoneBook {
        listTest.insertPhone(contact1);
        listTest.removePhone("aon");
        listTest.display();
+        Contact contact4 = new Contact("bon","999999999", friend);
+        Contact contact5 = new Contact("1on","999999999", friend);
+       listTest.insertPhone(contact4);
+       listTest.insertPhone(contact5);
+       listTest.display();
+       listTest.sortByName();
+        System.out.println("searching");
+       listTest.searchPhone("999999999");
 
 
     }

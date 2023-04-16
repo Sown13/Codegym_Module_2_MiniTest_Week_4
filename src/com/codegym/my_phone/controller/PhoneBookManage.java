@@ -2,10 +2,8 @@ package com.codegym.my_phone.controller;
 import com.codegym.my_phone.model.*;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class PhoneBookManage extends Phone implements IPhone {
@@ -15,8 +13,8 @@ public class PhoneBookManage extends Phone implements IPhone {
     public void searchPhone(String name) {
         List<Contact> listByName = contactList
                 .stream()
-                .filter(contact -> contact.getName().contains(name))
-                .collect(Collectors.toList());
+                .filter(contact -> contact.getName().contains(name) || contact.getPhoneNumer().contains(name))
+                .toList();
         System.out.println(listByName);
     }
 
@@ -25,7 +23,7 @@ public class PhoneBookManage extends Phone implements IPhone {
         List<Contact> listSortedByName = contactList
                 .stream()
                 .sorted(Comparator.comparing(Contact::getName))
-                .collect(Collectors.toList());
+                .toList();
         System.out.println(listSortedByName);
     }
 
@@ -33,7 +31,7 @@ public class PhoneBookManage extends Phone implements IPhone {
     public void display(Type type) {
             List<Contact> listFilter = contactList.stream()
                     .filter(typeFilter -> typeFilter.getType().getTypeName().equals(type.getTypeName()))
-                    .collect(Collectors.toList());
+                    .toList();
             System.out.println(listFilter);
     }
     public void display(){
@@ -46,14 +44,11 @@ public class PhoneBookManage extends Phone implements IPhone {
                 .stream()
                 .anyMatch(nameCheck -> nameCheck.getName().equals(contact.getName()));
         if(isExisted){
-            for(int i =0; i< contactList.size();i++){
-                if(contactList.get(i).getName().equals(contact.getName())){
-                    contactList.get(i).setPhoneNumer(contact.getPhoneNumer());
-                    contactList.get(i).setType(contact.getType());
-                    break;
-                }
-            }
-        }else {
+           List<Contact> insertContact = contactList.stream().filter(nameCheck -> nameCheck.getName().equals(contact.getName())).toList();
+           insertContact.get(0).setPhoneNumer(contact.getPhoneNumer());
+           insertContact.get(0).setType(contact.getType());
+        }
+        else {
             contactList.add(contact);
         }
     }
@@ -62,11 +57,12 @@ public class PhoneBookManage extends Phone implements IPhone {
     public void removePhone(String name) {
         contactList = contactList
                 .stream()
-                .filter(contact -> !contact.getName().equals(name)).collect(Collectors.toList());
+                .filter(contact -> !contact.getName().equals(name))
+                .collect(Collectors.toList());
     }
 
     @Override
     public void updatePhone(String name, String newPhone) {
-
+// check and update from .txt
     }
 }
