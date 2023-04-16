@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class PhoneBookManage extends Phone implements IPhone {
@@ -45,7 +46,13 @@ public class PhoneBookManage extends Phone implements IPhone {
                 .stream()
                 .anyMatch(nameCheck -> nameCheck.getName().equals(contact.getName()));
         if(isExisted){
-
+            for(int i =0; i< contactList.size();i++){
+                if(contactList.get(i).getName().equals(contact.getName())){
+                    contactList.get(i).setPhoneNumer(contact.getPhoneNumer());
+                    contactList.get(i).setType(contact.getType());
+                    break;
+                }
+            }
         }else {
             contactList.add(contact);
         }
@@ -53,6 +60,9 @@ public class PhoneBookManage extends Phone implements IPhone {
 
     @Override
     public void removePhone(String name) {
+        contactList = contactList
+                .stream()
+                .filter(contact -> !contact.getName().equals(name)).collect(Collectors.toList());
     }
 
     @Override

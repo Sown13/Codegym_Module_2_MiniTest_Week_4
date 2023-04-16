@@ -16,9 +16,10 @@ public class ManagePhoneBook {
         listTest.insertPhone(contact1);
         listTest.insertPhone(contact2);
         listTest.insertPhone(contact3);
-        listTest.display(friend);
-        listTest.display();
-        listTest.sortByName();
+       listTest.insertPhone(contact1);
+       listTest.removePhone("aon");
+       listTest.display();
+
 
     }
 }
