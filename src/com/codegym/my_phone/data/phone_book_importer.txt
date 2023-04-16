@@ -1,0 +1,9 @@
+son 123456789 Friend
+nam 123456286 Friend
+Giang 99999 Company
+giang 55555 Friend
+Giang 88888 Company
+Hung 256786 Other
+Thi 32156864 Family
+Tuan 3256762 Customer
+Cong 6681453 Company

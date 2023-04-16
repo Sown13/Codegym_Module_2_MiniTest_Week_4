@@ -1,6 +1,8 @@
 package com.codegym.my_phone.model;
 
-public class Type {
+import java.io.Serializable;
+
+public class Type implements Serializable {
     private static int autoId = 1000;
     private String id;
     private String typeName = "Friend";

@@ -1,16 +1,20 @@
 package com.codegym.my_phone;
 
 import com.codegym.my_phone.controller.PhoneBookManage;
+import com.codegym.my_phone.data.ReadPhoneNumber;
+import com.codegym.my_phone.data.WritePhoneNumber;
 import com.codegym.my_phone.model.Contact;
 import com.codegym.my_phone.model.Type;
 
+import java.util.List;
 import java.util.Scanner;
 
 
 public class ManagePhoneBook {
     public static void main(String[] args) {
-      menu();
+        menu();
     }
+
     public static void menu() {
         PhoneBookManage phoneBook = new PhoneBookManage();
         Scanner scanner = new Scanner(System.in);
@@ -45,7 +49,7 @@ public class ManagePhoneBook {
                         System.out.println("0/ Back to main menu");
                         choice = Integer.parseInt(scanner.nextLine());
                         switch (choice) {
-                            case 1 -> phoneBook.display();
+                            case 1 -> ReadPhoneNumber.readPhoneBook();
                             case 2 -> phoneBook.display(friend);
                             case 3 -> phoneBook.display(family);
                             case 4 -> phoneBook.display(company);
@@ -85,7 +89,7 @@ public class ManagePhoneBook {
                     String name = scanner.nextLine();
                     System.out.println("Enter the phone number");
                     String phoneNumber = scanner.nextLine();
-                    phoneBook.updatePhone(name,phoneNumber);
+                    phoneBook.updatePhone(name, phoneNumber);
                 }
                 case 5 -> {
                     System.out.println("Enter the contact name or phone number to find:");
@@ -94,9 +98,23 @@ public class ManagePhoneBook {
                 }
                 case 6 -> {
 
+                    System.out.println("Enter path to file - or press enter again to auto get path");
+                    String pathName = scanner.nextLine();
+                    if (pathName.equals("")) {
+                        pathName = "src\\com\\codegym\\my_phone\\data\\phone_book_importer.txt";
+                    }
+                    List<Contact> importList = ReadPhoneNumber.importPhoneBook(pathName);
+                    for (Contact contact : importList) {
+                        phoneBook.insertPhone(contact);
+                    }
                 }
                 case 7 -> {
-
+                    System.out.println("Enter path to file - or press enter again to auto get path");
+                    String pathName = scanner.nextLine();
+                    if (pathName.equals("")) {
+                        pathName = "src\\com\\codegym\\my_phone\\data\\phone_book_exporter.txt";
+                    }
+                    WritePhoneNumber.exportPhoneNumber(phoneBook.getContactList(), pathName);
                 }
                 case 0 -> System.exit(0);
             }

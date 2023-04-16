@@ -1,2 +1,0 @@
-Son , 0123456789, Family, Family1001
-Nam , 0123456879, Friend, Friend1001

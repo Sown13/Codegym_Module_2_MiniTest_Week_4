@@ -1,5 +1,6 @@
 package com.codegym.my_phone.controller;
 
+import com.codegym.my_phone.data.WritePhoneNumber;
 import com.codegym.my_phone.model.Contact;
 import com.codegym.my_phone.model.IPhone;
 import com.codegym.my_phone.model.Phone;
@@ -44,10 +45,6 @@ public class PhoneBookManage extends Phone implements IPhone {
         System.out.println(listFilter);
     }
 
-    public void display() {
-        System.out.println(contactList);
-    }
-
     @Override
     public void insertPhone(Contact contact) {
         boolean isExisted = contactList
@@ -65,6 +62,7 @@ public class PhoneBookManage extends Phone implements IPhone {
         } else {
             contactList.add(contact);
         }
+        WritePhoneNumber.saveToPhoneBook(contactList);
         System.out.println("Success to insert");
     }
 
@@ -74,11 +72,16 @@ public class PhoneBookManage extends Phone implements IPhone {
                 .stream()
                 .filter(contact -> !contact.getName().equals(name))
                 .collect(Collectors.toList());
+        WritePhoneNumber.saveToPhoneBook(contactList);
     }
 
     @Override
     public void updatePhone(String name, String newPhone) {
         Contact newContact = new Contact(name, newPhone);
         insertPhone(newContact);
+    }
+
+    public List<Contact> getContactList() {
+        return contactList;
     }
 }

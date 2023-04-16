@@ -1,6 +1,8 @@
 package com.codegym.my_phone.model;
 
-public class Contact {
+import java.io.Serializable;
+
+public class Contact implements Serializable {
     private String name;
     private String phoneNumber;
     private Type type;
@@ -23,9 +25,6 @@ public class Contact {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public String getPhoneNumer() {
         return phoneNumber;
