@@ -40,6 +40,7 @@ public class ManagePhoneBook {
             System.out.println("8/ Test write generic");
             System.out.println("9/ Test read generic");
             System.out.println("10/ Clear Phone Book");
+            System.out.println("11/ Sort phone book by name");
             System.out.println("0/ Exit");
             choice = Integer.parseInt(scanner.nextLine());
             switch (choice) {
@@ -131,6 +132,7 @@ public class ManagePhoneBook {
                     System.out.println(reader.readPhoneBookGeneric());
                 }
                 case 10 -> phoneBook.clearPhoneBook();
+                case 11 -> phoneBook.sortByName();
                 case 0 -> System.exit(0);
             }
         }

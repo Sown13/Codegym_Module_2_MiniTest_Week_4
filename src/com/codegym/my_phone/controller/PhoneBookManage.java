@@ -30,11 +30,12 @@ public class PhoneBookManage extends Phone implements IPhone {
 
     @Override
     public void sortByName() {
-        List<Contact> listSortedByName = contactList
+        contactList = contactList
                 .stream()
                 .sorted(Comparator.comparing(Contact::getName))
                 .toList();
-        System.out.println(listSortedByName);
+        System.out.println(contactList);
+        WritePhoneNumber.saveToPhoneBook(contactList);
     }
 
     @Override
