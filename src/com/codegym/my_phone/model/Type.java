@@ -1,24 +1,25 @@
 package com.codegym.my_phone.model;
 
 public class Type {
-    private static int hidden = 1000;
+    private static int autoId = 1000;
     private String id;
     private String typeName = "Friend";
 
     public Type() {
-        ++hidden;
-        this.id = typeName + hidden;
+        ++autoId;
+        this.id = typeName + autoId;
     }
 
     public Type(String typeName) {
-        ++hidden;
-        this.id = typeName + hidden;
+        ++autoId;
+        this.id = typeName + autoId;
         this.typeName = typeName;
     }
 
     public String getId() {
         return id;
     }
+
 
     public String getTypeName() {
         return typeName;
@@ -28,11 +29,4 @@ public class Type {
         this.typeName = typeName;
     }
 
-    @Override
-    public String toString() {
-        return "Type{" +
-                "id='" + id + '\'' +
-                ", typeName='" + typeName + '\'' +
-                '}';
-    }
 }
